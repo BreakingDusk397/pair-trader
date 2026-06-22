@@ -1,0 +1,27 @@
+# ===========================================================================
+#  pairs-trading dependencies  (Python 3.12 / Ubuntu 24.04 x64)
+# ---------------------------------------------------------------------------
+#  Philosophy: anchor the STATISTICS engine exactly (it decides cointegration /
+#  ADF / Johansen / OLS outcomes, i.e. which pairs pass the gates) and let pip
+#  resolve a mutually-compatible recent set for everything else. After the first
+#  successful install run:
+#       pip freeze > requirements.lock
+#  and commit the lock for byte-identical redeploys. For exact parity with your
+#  Colab results, run `pip freeze` in Colab and copy those pins here instead.
+# ===========================================================================
+
+# --- stat-engine anchor: DO NOT bump without re-validating backtest numbers ---
+statsmodels==0.14.6
+
+# --- scientific stack: capped below the next majors the code is not proven on -
+numpy>=2.0,<3
+pandas>=2.2,<3
+scipy>=1.13
+matplotlib>=3.8          # headless: export MPLBACKEND=Agg before running
+
+# --- data + UX ---
+yfinance>=0.2.40         # keep recent: Yahoo endpoint changes break old pins
+tqdm>=4.66               # optional; scanner falls back to a text bar if absent
+
+# --- Alpaca paper trader (pairs_paper_trader.py) ---
+alpaca-py>=0.43,<1.0

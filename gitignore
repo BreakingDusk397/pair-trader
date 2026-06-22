@@ -1,0 +1,22 @@
+# --- virtualenv / byte-code caches ---
+.venv/
+__pycache__/
+*.pyc
+
+# --- SECRETS: never commit Alpaca keys ---
+.env
+
+# --- generated artifacts (scanner outputs + paper-trader state) ---
+pair_scanner_results.csv
+pair_scanner_robust.csv
+optimized_params.json
+zscore_history.png
+*.png
+
+# --- SQLite paper-trading database (WAL mode writes 3 files) ---
+paper_trades.db
+paper_trades.db-wal
+paper_trades.db-shm
+
+# NOTE: requirements.lock is intentionally NOT ignored -- commit it so every
+# future droplet resolves to the exact same dependency set.
