@@ -230,7 +230,7 @@ class Config:
     regime_n: int = 3                     # contiguous regimes for worst-regime floor
     # ---- progress + parallelism for the config search (additive; opt-in) ---
     cfgsearch_progress: bool = True       # render a progress bar over the configs
-    cfgsearch_n_jobs: int = 8             # parallel workers across configs (>1 -> process pool)
+    cfgsearch_n_jobs: int = 7             # parallel workers across configs (>1 -> process pool)
     cfgsearch_progress_min_interval: float = 0.0  # min secs between text-bar redraws
 
     # ---- per-pair LEG MODE (one-leg vs two-leg), selected by the WFA -------
