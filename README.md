@@ -14,7 +14,8 @@ git clone https://github.com/BreakingDusk397/pair-trader.git && cd pair-trader
 
 # 4. Bootstrap the venv (idempotent; installs requirements.txt, writes requirements.lock, runs an import smoke test):
 ```
-bash./setup.sh
+chmod +x setup.sh
+./setup.sh
 ```
 
 # 5. Run the scan — use tmux so an SSH drop doesn't kill a multi-hour run:
