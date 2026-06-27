@@ -12,6 +12,7 @@
 
 # --- stat-engine anchor: DO NOT bump without re-validating backtest numbers ---
 statsmodels==0.14.6
+openpyxl
 
 # --- scientific stack: capped below the next majors the code is not proven on -
 numpy>=2.0,<3
