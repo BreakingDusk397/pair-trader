@@ -23,6 +23,8 @@ chmod +x setup.sh
 source .venv/bin/activate
 export MPLBACKEND=Agg
 tmux new -s scan
+```
+```
 python run_search.py          # robust CPCV scan across all vCPUs
 # detach: Ctrl-b then d   |   reattach: tmux attach -t scan
 ```
