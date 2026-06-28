@@ -91,31 +91,31 @@ class Config:
     rs_draws: int = 200                # candidate parameter draws per fold
 
     # ---- pre-screen filter thresholds (cheap -> expensive) -----------------
-    f1_min_history_days: int = 756     # ~3y minimum overlap
-    f1_min_dollar_vol: float = 5e5     # min avg daily dollar volume (USD)
-    f2_corr_window: int = 252
-    f2_min_corr: float = 0.60
-    f3_eg_pvalue: float = 0.05         # Engle-Granger ADF p-value
-    f4_johansen_det_order: int = 0     # constant, no trend
-    f4_johansen_k_ar_diff: int = 1
-    f4_johansen_cv_idx: int = 1        # 0=90%, 1=95%, 2=99% critical value
-    f5_half_life_min: float = 1.0
-    f5_half_life_max: float = 126.0
+    f1_min_history_days: int = 1120     # ~3y minimum overlap
+    f1_min_dollar_vol: float = 5e4     # min avg daily dollar volume (USD)
+    f2_corr_window: int = 449
+    f2_min_corr: float = 0.55
+    f3_eg_pvalue: float = 0.01         # Engle-Granger ADF p-value
+    f4_johansen_det_order: int = -1     # constant, no trend
+    f4_johansen_k_ar_diff: int = 2
+    f4_johansen_cv_idx: int = 0        # 0=90%, 1=95%, 2=99% critical value
+    f5_half_life_min: float = 10.0
+    f5_half_life_max: float = 84.0
     f6_hurst_max: float = 0.50
-    f7_variance_ratio_max: float = 1.0
+    f7_variance_ratio_max: float = 0.85
     f7_vr_lag: int = 5
-    f8_min_crossings_per_year: float = 6.0
-    f8_cross_z_window: int = 63
-    f9_beta_cusum_max: float = 5.0     # max scaled CUSUM excursion (stability)
-    f9_beta_window: int = 126
+    f8_min_crossings_per_year: float = 5.0
+    f8_cross_z_window: int = 113
+    f9_beta_cusum_max: float = 4.0     # max scaled CUSUM excursion (stability)
+    f9_beta_window: int = 252
 
     # ---- sector overlay (Approach A) --------------------------------------
     use_ex_name_basket: bool = True    # ex-name EW basket vs raw XLF proxy
     omega_pair: float = 0.65
     omega_sec: float = 0.35
-    kappa_min: float = 0.50            # conviction multiplier floor
-    kappa_max: float = 1.50            # conviction multiplier cap
-    gross_leverage_cap: float = 2.0    # |w_i| + |w_j| ceiling after renorm
+    kappa_min: float = 0.55            # conviction multiplier floor
+    kappa_max: float = 3.0            # conviction multiplier cap
+    gross_leverage_cap: float = 3.0    # |w_i| + |w_j| ceiling after renorm
     # ---- overlay ablation: trade the overlay only where it BEATS the base
     #      bivariate signal out-of-sample, else auto fall back to base. z_ib and
     #      z_jb are still computed in either mode, so the sector z-scores remain
@@ -127,10 +127,10 @@ class Config:
     # ---- systematic sector-ETF assignment (peer-group basket) -------------
     use_systematic_sector: bool = True  # data-driven peer group vs whole-universe
     sector_per_fold: bool = True        # re-estimate peer group every WFA fold
-    sector_assign_min_r2: float = 0.30  # floor R^2 for a valid leg->ETF map
-    sector_pair_min_r2: float = 0.20    # floor on min(R2_i, R2_j) for a shared ETF
-    sector_peer_min_names: int = 5      # min ex-name peer count to use the group
-    sector_r2_window: int = 756         # trailing dev window for the R^2 fit
+    sector_assign_min_r2: float = 0.45  # floor R^2 for a valid leg->ETF map
+    sector_pair_min_r2: float = 0.30    # floor on min(R2_i, R2_j) for a shared ETF
+    sector_peer_min_names: int = 6      # min ex-name peer count to use the group
+    sector_r2_window: int = 325         # trailing dev window for the R^2 fit
     # clean, UNLEVERAGED, non-inverse financial sub-sector ETFs used only as
     # cluster labels (the traded reference is always an ex-name peer basket):
     sector_etf_candidates: Tuple[str, ...] = (
@@ -148,7 +148,7 @@ class Config:
     )
 
     # ---- Johansen veto (Approach B) ---------------------------------------
-    veto_scale: float = 0.50           # trade multiplier when B disagrees w/ A
+    veto_scale: float = 0.90           # trade multiplier when B disagrees w/ A
     veto_det_order: int = 0
     veto_k_ar_diff: int = 1
 
@@ -209,11 +209,11 @@ class Config:
 
     # ---- CPCV config-search harness (robust auto-tuning; opt-in) -----------
     cfgsearch_enable: bool = True         # master switch for run_robust_scan
-    cfgsearch_n_configs: int = 30         # candidate configs (config 0 = base)
+    cfgsearch_n_configs: int = 20         # candidate configs (config 0 = base)
     cfgsearch_seeds: Tuple[int, ...] = (7, 17)   # seeds per config
     cfgsearch_rs_draws: int = 200         # reduced random-search draws in search
     cfgsearch_eval_pairs: int = 15        # cap pairs evaluated per config
-    cfgsearch_min_survivors: int = 3      # configs with fewer prescreen survivors
+    cfgsearch_min_survivors: int = 4      # configs with fewer prescreen survivors
     #                                       are treated as not credibly evaluable
     #                                       (a 1-2 pair "robust" reading is noise);
     #                                       set 1 to restore the old >=1 behaviour
