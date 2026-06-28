@@ -155,8 +155,8 @@ class Config:
     # ---- trading rule defaults (also the random-search grid centres) -------
     z_window: int = 126                 # rolling mu/sigma window for z-score
     entry_z: float = 2.0
-    exit_z: float = 0.5
-    stop_z: float = 4.0
+    exit_z: float = 0.0
+    stop_z: float = 6.0
     cost_bps_per_side: float = 10.0    # >= 10 bps per side per leg
     model: str = "residual"            # "residual" or "ratio" (default engine)
 
@@ -210,8 +210,8 @@ class Config:
     # ---- CPCV config-search harness (robust auto-tuning; opt-in) -----------
     cfgsearch_enable: bool = True         # master switch for run_robust_scan
     cfgsearch_n_configs: int = 20         # candidate configs (config 0 = base)
-    cfgsearch_seeds: Tuple[int, ...] = (7, 17)   # seeds per config
-    cfgsearch_rs_draws: int = 200         # reduced random-search draws in search
+    cfgsearch_seeds: Tuple[int, ...] = (7, 17, 27)   # seeds per config
+    cfgsearch_rs_draws: int = 100         # reduced random-search draws in search
     cfgsearch_eval_pairs: int = 15        # cap pairs evaluated per config
     cfgsearch_min_survivors: int = 4      # configs with fewer prescreen survivors
     #                                       are treated as not credibly evaluable
