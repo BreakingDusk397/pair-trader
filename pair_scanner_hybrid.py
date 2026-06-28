@@ -88,7 +88,7 @@ class Config:
     wfa_sub_folds: int = 5             # sub-folds inside the train window for SoS
 
     # ---- random search -----------------------------------------------------
-    rs_draws: int = 500                # candidate parameter draws per fold
+    rs_draws: int = 200                # candidate parameter draws per fold
 
     # ---- pre-screen filter thresholds (cheap -> expensive) -----------------
     f1_min_history_days: int = 756     # ~3y minimum overlap
