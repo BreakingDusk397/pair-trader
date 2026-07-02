@@ -81,7 +81,7 @@ class Config:
     #                                     truncate the common calendar)
 
     # ---- hold-out / WFA windows -------------------------------------------
-    hold_out_frac: float = 0.20        # final sealed block (static gate)
+    hold_out_frac: float = 0.30        # final sealed block (static gate)
     wfa_train_days: int = 1008          # ~2y rolling train window
     wfa_test_days: int = 252           # ~6m rolling test window
     wfa_step_days: int = 252           # non-overlapping test windows
@@ -185,7 +185,7 @@ class Config:
 
     # ---- random-search grid (sampled uniformly from these sets) -----------
     grid_z_window: Tuple[int, ...] = (21, 30, 42, 56, 63, 84, 112, 126, 140, 150, 168, 196, 224, 252)
-    grid_entry_z: Tuple[float, ...] = ( 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0)
+    grid_entry_z: Tuple[float, ...] = ( 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0)
     grid_exit_z: Tuple[float, ...] = (-0.1, -0.25, -0.5, -0.75, -1.0, 0.0, 0.1, 0.25, 0.5, 0.75, 1.0)
     grid_stop_z: Tuple[float, ...] = (3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0)
     grid_model: Tuple[str, ...] = ("residual", "ratio")
@@ -198,18 +198,18 @@ class Config:
     sharpe_suspect_level: float = 3.0  # > this -> flag for bias investigation
 
     # ---- composite score weights ------------------------------------------
-    w_oos_sos: float = 0.25
-    w_holdout_sharpe: float = 0.25
+    w_oos_sos: float = 0.20
+    w_holdout_sharpe: float = 0.30
     w_calmar: float = 0.15
-    w_dd_penalty: float = 0.10
+    w_dd_penalty: float = 0.15
     w_trade_suff: float = 0.05
     w_filter_margin: float = 0.05
     w_beta_stability: float = 0.10
-    w_veto_agreement: float = 0.05
+    w_veto_agreement: float = 0.00
 
     # ---- CPCV config-search harness (robust auto-tuning; opt-in) -----------
     cfgsearch_enable: bool = True         # master switch for run_robust_scan
-    cfgsearch_n_configs: int = 20         # candidate configs (config 0 = base)
+    cfgsearch_n_configs: int = 10         # candidate configs (config 0 = base)
     cfgsearch_seeds: Tuple[int, ...] = (7, 17, 27)   # seeds per config
     cfgsearch_rs_draws: int = 100         # reduced random-search draws in search
     cfgsearch_eval_pairs: int = 15        # cap pairs evaluated per config
